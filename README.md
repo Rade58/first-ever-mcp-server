@@ -1,0 +1,88 @@
+# Simplest mcp server STDIO way
+
+## listing tool we build (method "tools/list")
+
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {"name": "add", "arguments": {}}}' | node mcp.ts | jq
+```
+
+## calling tool (method "tools/call")
+
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "add", "arguments": {"a": 2, "b": 3}}}' | node mcp.ts | jq
+```
+
+## initialize (method "initialize")
+
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "test-client", "version": "1.0.0"}}}' | node mcp.ts | jq
+```
+
+## using `jq` here for pretifying json output
+
+cool utility to see if json is correctly written, or to easy ly read outputed json
+
+You can pipe your stdin
+
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {"name": "add", "arguments": {}}}' | jq
+```
+
+and get
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/list",
+  "params": {
+    "name": "add",
+    "arguments": {}
+  }
+}
+
+```
+
+or stdout to see pritified json, which we want
+
+```bash
+echo '{"result":{"tools":[{"name":"add","title":"Addition Tool","description":"Adds two numbers together.","inputSchema":{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"a":{"type":"number"},"b":{"type":"number"}},"required":["a","b"]},"execution":{"taskSupport":"forbidden"}}]},"jsonrpc":"2.0","id":1}' | jq
+
+```
+
+you get this
+
+```json
+{
+  "result": {
+    "tools": [
+      {
+        "name": "add",
+        "title": "Addition Tool",
+        "description": "Adds two numbers together.",
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "a": {
+              "type": "number"
+            },
+            "b": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "a",
+            "b"
+          ]
+        },
+        "execution": {
+          "taskSupport": "forbidden"
+        }
+      }
+    ]
+  },
+  "jsonrpc": "2.0",
+  "id": 1
+}
+```

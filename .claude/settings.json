@@ -1,0 +1,8 @@
+{
+  "env": {
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "qwen/qwen3-coder-next",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek/deepseek-v3.2",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "qwen/qwen3-coder-next",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "qwen/qwen3-coder-next"
+  }
+}
