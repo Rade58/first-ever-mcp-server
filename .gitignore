@@ -51,3 +51,9 @@ coverage/
 .cache/
 .eslintcache
 .parcel-cache/
+
+
+
+# mcp stuff just because absolute paths I
+# don't want to commit
+.mcp.json

@@ -17,6 +17,9 @@ const server = new McpServer({
   version: "1.0.0",
 });
 
+// for health checking
+// throw new Error("what is going on!");
+
 // 2
 server.registerTool(
   "add",
